@@ -19,7 +19,7 @@ from microflack_common import requests
 import base64
 
 # game stuff:
-#from src.schafkopf import schafkopf #<-- requires numpy!!!
+from src.schafkopf import schafkopf #<-- requires numpy!!!
 
 logging.basicConfig(level=logging.INFO, format='[%(funcName)10s()-%(lineno)s:] %(message)s')
 
@@ -143,7 +143,7 @@ def after_game_update(mapper, connection, target):
 @app.before_first_request
 def before_first_request():
     """Start a background thread that looks for users that leave."""
-    logging.warning("huhu")
+    logging.warning("huhuuuuuuuuu")
     # def find_offline_users():
     #     with app.app_context():
     #         while True:
@@ -183,7 +183,7 @@ def new_game():
     # create game
     db_game             = Game.create(in_r or {})
     db_game.start_cards = {}
-    #game_obj            = schafkopf(options)
+    game_obj            = schafkopf(options)
     game_obj.reset()
 
     #sort hand cards:
@@ -215,7 +215,7 @@ def get_options(id, name):
     game_db = Game.query.get_or_404(id)
     # create the game:
     res = get_game_options(game_db.game_name, game_db.names, game_db.styles)
-    #game_obj   = schafkopf(res)
+    game_obj   = schafkopf(res)
     game_obj.reset()
     phase, error_msg = game_obj.playGame(game_db.declarations, game_db.table_cards, game_db.start_cards)
     r_dict = {}
@@ -249,7 +249,7 @@ def send_declaration(id):
 
     # create the game:
     res = get_game_options(game_db.game_name, game_db.names, game_db.styles)
-    #game_obj   = schafkopf(res)
+    game_obj   = schafkopf(res)
     game_obj.reset()
     phase, error_msg = game_obj.playGame(game_db.declarations, game_db.table_cards, game_db.start_cards)
     r_dict = {}
